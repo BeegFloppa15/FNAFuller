@@ -7,6 +7,7 @@ public class Animatronic : MonoBehaviour
     //Any number from 0-20
     public int agression;
     public int locationIndex;
+    public GameObject animatronImage;
     [SerializeField] GameObject[] locations;
 
     // Start is called before the first frame update
@@ -20,13 +21,20 @@ public class Animatronic : MonoBehaviour
     {
         if (locations[locationIndex].activeInHierarchy)
         {
-            this.GetComponent<Image>().SetActive(true);
+            animatronImage.SetActive(true);
         }
         else
         {
-            this.GetComponent<Image>().SetActive(false);
+            animatronImage.SetActive(false);
         }
+
+        if (Input.GetKeyDown("m")) 
+        {
+            MoveLocation();
+        }
+
     }
+
 
     void MoveLocation()
     {
