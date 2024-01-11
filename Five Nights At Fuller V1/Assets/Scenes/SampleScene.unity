@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19159c8714ae724eb44dd6ea2cdc028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agression: 0
+  agression: 10
   locationIndex: 0
   animatronImage: {fileID: 2047877770}
   locations:
@@ -929,6 +929,8 @@ MonoBehaviour:
   - {fileID: 973042925}
   - {fileID: 853369519}
   - {fileID: 1227226427}
+  moveTimer: 0
+  decisionTime: 5
 --- !u!114 &584966652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &621357478
 RectTransform:
   m_ObjectHideFlags: 0
