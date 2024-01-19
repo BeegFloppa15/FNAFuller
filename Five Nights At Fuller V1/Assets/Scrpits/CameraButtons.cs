@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraButtons : MonoBehaviour
 {
     [SerializeField] GameObject[] screens;
+    [SerializeField] GameObject scrollView;
     public GameObject lastActive;
 
     public void ButtonClick(GameObject activeScreen)
@@ -26,10 +27,12 @@ public class CameraButtons : MonoBehaviour
             }
             screens[i].SetActive(false);
         }
+        scrollView.SetActive(false);
     }
 
     public void EnableCams()
     {
         lastActive.SetActive(true);
+        scrollView.SetActive(true);
     }
 }
