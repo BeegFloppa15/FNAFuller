@@ -10,6 +10,7 @@ public class Animatronic : MonoBehaviour
     public int locationIndex;
     public GameObject animatronImage;
     [SerializeField] GameObject[] locations;
+    [SerializeField] GameObject[] locImages;
     public float moveTimer;
     public float decisionTime;
 
@@ -18,7 +19,7 @@ public class Animatronic : MonoBehaviour
     {
         locationIndex = 0;
         moveTimer = 0.0f;
-        
+        animatronImage = locImages[0];
     }
 
     // Update is called once per frame
@@ -53,9 +54,14 @@ public class Animatronic : MonoBehaviour
         if (Random.Range(1, 20) <= agression)
         {
             MoveLocation();
-            Debug.Log("Moved");
+            //Note, the location printed out is NOT what camera they are at, but instead the index
+            Debug.Log("Moved to spot " + locationIndex);
         }
-        Debug.Log("Decision Made");
+        else
+        {
+            Debug.Log("Staying at spot " + locationIndex);
+        }
+       
     }
 
 
@@ -68,6 +74,9 @@ public class Animatronic : MonoBehaviour
         if (locationIndex >= locations.Length)
         {
             locationIndex = 2;
+
         }
+        animatronImage.SetActive(false);
+        animatronImage = locImages[locationIndex];
     }
 }
