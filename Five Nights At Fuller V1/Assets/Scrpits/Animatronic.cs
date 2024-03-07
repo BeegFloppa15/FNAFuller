@@ -7,12 +7,13 @@ public class Animatronic : MonoBehaviour
     /**Any number from 0-20 */
     public int agression;
 
-    public int locationIndex;
-    public GameObject animatronImage;
-    [SerializeField] GameObject[] locations;
-    [SerializeField] GameObject[] locImages;
-    public float moveTimer;
-    public float decisionTime;
+    public int locationIndex;                   //An index of where the animatronic is in the building
+    public GameObject animatronImage;           //The image that is displayed of the animatronic on cameras
+    [SerializeField] GameObject[] locations;    //An array of the camera locations, in the order that THIS SPECIFIC ANIMATRONIC goes on
+    [SerializeField] GameObject[] locImages;    //A list of images which are different based on the animatronics location. Go in the same order as the locations
+    public float moveTimer;                     //A float that increases with time
+    public float decisionTime;                  //When the move timer is greater than this number, we make a decision to move.
+    public GameObject hidingScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -73,10 +74,35 @@ public class Animatronic : MonoBehaviour
         }
         if (locationIndex >= locations.Length)
         {
-            locationIndex = 2;
+            attemptJumpscare();
+            //locationIndex = 2;
 
         }
         animatronImage.SetActive(false);
         animatronImage = locImages[locationIndex];
+    }
+
+    void attemptJumpscare()
+    {
+        float scareTimer = 0.0f;
+        float decisionTime = Random.Range(5, 10);
+
+        Debug.Log("Will attempt to jumpscare in " + decisionTime + "seconds");
+
+        while (scareTimer < decisionTime)
+        {
+            scareTimer += Time.deltaTime;
+        }
+
+        if (hidingScreen.activeInHierarchy)
+        {
+            Debug.Log("BOO! Jumpscare");
+        }
+        else
+        {
+            locationIndex = 2;
+            Debug.Log("Failed to spook, went back to spot 2");
+        }
+        
     }
 }
