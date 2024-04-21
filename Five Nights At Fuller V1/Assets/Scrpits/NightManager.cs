@@ -9,7 +9,6 @@ public class NightManager : MonoBehaviour
 {
     public bool isHiding;
     public bool lagDelayed;
-    public float processingTime;
     public GameObject completeTaskButton;
 
     public TMP_Text statusText;
@@ -23,25 +22,24 @@ public class NightManager : MonoBehaviour
     {
         isHiding = false;
         lagDelayed = false;
-        processingTime = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (lagDelayed)
-        {
-            processingTime = Random.Range(0.01f, 0.1f);
-        }
 
         if (currentTask != null && currentTask.myTask.GetComponent<AbsDoableTask>().finished)
         {
             completeTaskButton.GetComponent<Button>().interactable = true;
+            updateStatus(currentTask.taskStatus);
         }
         else
         {
             completeTaskButton.GetComponent<Button>().interactable = false;
+            updateStatus("Not Ready");
         }
+
+        
     }
 
     public void setCurrentTask(Task newTask){
@@ -56,8 +54,13 @@ public class NightManager : MonoBehaviour
 
     public void completeCurrentTask()
     {
-        currentTask.beingCompleted = true;
+        currentTask.completeTask();
         Debug.Log("This should take " + currentTask.completionTime + " Seconds.");
+    }
+
+    public void updateStatus(string newText)
+    {
+        statusText.text = "Status: " + newText;
     }
 
     /*
