@@ -41,10 +41,12 @@ public class Task : MonoBehaviour
         
     }
 
+    
     public void completeTask()
     {
         Coroutine myCoroutine = StartCoroutine(taskTimerCoroutine());
     }
+
 
     IEnumerator taskTimerCoroutine()
     {
@@ -66,19 +68,8 @@ public class Task : MonoBehaviour
         Debug.Log("Task Complete!");
         complete = true;
         taskStatus = "Complete!";
+        myManager.checkAllTasksDone();
 
     }
-
-    /*public float getCompletionTime()
-    {
-        if (myTask.GetComponent<AbsDoableTask>().finished)
-        {
-            return difficulty * Random.Range(0.7f, 2.0f);
-        }
-        else
-        {
-            return -1.0f;
-        }
-    } */
 
 }
