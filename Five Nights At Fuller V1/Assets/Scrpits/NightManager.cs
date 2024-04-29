@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 //There MUST Be an empty game object in the scene hierarchy with the name "NightManager"
 public class NightManager : MonoBehaviour
@@ -19,11 +20,14 @@ public class NightManager : MonoBehaviour
     public GameObject leaveCanvas;
     public GameObject winScreen;
 
+    public EventSystem eve;
+
     // Start is called before the first frame update
     void Start()
     {
         isHiding = false;
         lagDelayed = false;
+        eve = FindFirstObjectByType<EventSystem>();
     }
 
     // Update is called once per frame
@@ -55,6 +59,7 @@ public class NightManager : MonoBehaviour
         currentTask = newTask;
         currentTask.myTask.SetActive(true);
 
+        eve.SetSelectedGameObject(null);
     }
 
     /* This is called when the "Complete Task" Button is called
@@ -71,6 +76,14 @@ public class NightManager : MonoBehaviour
     public void updateStatus(string newText)
     {
         statusText.text = "Status: " + newText;
+    }
+
+    public void updateStatusforCams()
+    {
+        foreach (Task thisTask in nightTasks)
+        {
+            thisTask.taskStatus = "Ready to Complete Task!";
+        }
     }
 
     /* This is called when a task has been completed
