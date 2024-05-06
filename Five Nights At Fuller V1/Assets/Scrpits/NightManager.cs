@@ -8,27 +8,31 @@ using UnityEngine.EventSystems;
 //There MUST Be an empty game object in the scene hierarchy with the name "NightManager"
 public class NightManager : MonoBehaviour
 {
-    public bool isHiding;
-    public bool lagDelayed;
-    public GameObject completeTaskButton;
+    //PLAYER STATUS
+    public bool isHiding;                   // True if player is hiding under desk, false otherwise
+    public bool camsOpen;                   // True if cameras/camera view is open, false otherwise
+    public bool lagDelayed;                 // True if Starship Robot is in Server Room, false otherwise
+    
+    //VISIBLE TASK VIEW ELEMENTS
+    public GameObject completeTaskButton;   // A button to activate a task's completion timer
+    public TMP_Text statusText;             // Text displayed below task view
+    public GameObject leaveCanvas;          // To be displayed when all tasks are finished, allowing player to finish the night and win
+    public GameObject winScreen;            // To be displayed when player presses the button to leave, finishing the night and winning
 
-    public TMP_Text statusText;
-
-    public Task[] nightTasks;
-    public Task currentTask;
-
-    public GameObject leaveCanvas;
-    public GameObject winScreen;
-
-    public EventSystem eve;
+    //INVISIBLE MANAGEMENT THINGS
+    public Task[] nightTasks;               // A list of all the tasks that need to be done in this night
+    public Task currentTask;                // The current task that is selected and activated
+    public EventSystem eve;                 // The event system. We reference it for like... one thing. It's stupid
 
     // Start is called before the first frame update
     void Start()
     {
         isHiding = false;
         lagDelayed = false;
+        camsOpen = false;
         eve = FindFirstObjectByType<EventSystem>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -48,7 +52,9 @@ public class NightManager : MonoBehaviour
         
     }
 
-    /* This function is called when a Task button in the TaskList scroll view is clicked
+
+    /* --- setCurrentTask ---
+     * This function is called when a Task button in the TaskList scroll view is clicked
      * It disables the current doable task (if there is one) and enables the newly selected task
      * It also changes which Task object is stored as the current task
      */
@@ -62,7 +68,9 @@ public class NightManager : MonoBehaviour
         eve.SetSelectedGameObject(null);
     }
 
-    /* This is called when the "Complete Task" Button is called
+
+    /* --- completeCurrentTask ---
+     * This is called when the "Complete Task" Button is called
      * It calls the completion function of the stored current task
      */
     public void completeCurrentTask()
@@ -71,22 +79,18 @@ public class NightManager : MonoBehaviour
         Debug.Log("This should take " + currentTask.completionTime + " Seconds.");
     }
 
-    /* This changes the status text displayed in the task view
+    /* --- updateStatus ---
+     * This changes the status text displayed in the task view
      */
     public void updateStatus(string newText)
     {
         statusText.text = "Status: " + newText;
     }
 
-    public void updateStatusforCams()
-    {
-        foreach (Task thisTask in nightTasks)
-        {
-            thisTask.taskStatus = "Ready to Complete Task!";
-        }
-    }
 
-    /* This is called when a task has been completed
+
+    /* --- checkAllTasksDone ---
+     * This is called when a task has been completed
      * It checks if all tasks have been completed, and if they have, it displays the option to leave. 
      */
     public void checkAllTasksDone()
@@ -104,7 +108,8 @@ public class NightManager : MonoBehaviour
         leaveCanvas.SetActive(true);
     }
 
-    /* This is called when the "Log off" button on the leave screen is pressed
+    /* --- winNight ---
+     * This is called when the "Log off" button on the leave screen is pressed
      * It activates the win screen and makes it fade in with the Fade and load coroutine
      * 
      * !!! TO-DO !!! - Make this de-activate the animatronics when we win
