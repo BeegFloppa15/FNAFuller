@@ -67,7 +67,7 @@ public class Task : MonoBehaviour
             }
             else if (myManager.isHiding || myManager.camsOpen)
             {
-                completionTime = completionTime - (Time.deltaTime * 0.2f);
+                completionTime = completionTime - (Time.deltaTime * 0.6f);
                 taskStatus = "Working...";
             }
             else

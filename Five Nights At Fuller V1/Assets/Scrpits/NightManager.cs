@@ -52,6 +52,22 @@ public class NightManager : MonoBehaviour
         
     }
 
+    /* Changes the hiding status, to be called when Hiding Buttons are pressed
+     * Takes in a bool value
+     */
+    public void setHidingStatus(bool bruh)
+    {
+        isHiding = bruh;
+    }
+
+
+    /* Changes the camsOpen bool, to be called when Open Cams and Close Cams buttons are pressed
+     * Takes in a bool value
+     */
+    public void setCamStatus(bool bruh)
+    {
+        camsOpen = bruh;
+    }
 
     /* --- setCurrentTask ---
      * This function is called when a Task button in the TaskList scroll view is clicked
