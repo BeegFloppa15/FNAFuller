@@ -23,6 +23,7 @@ public class NightManager : MonoBehaviour
     public Task[] nightTasks;               // A list of all the tasks that need to be done in this night
     public Task currentTask;                // The current task that is selected and activated
     public EventSystem eve;                 // The event system. We reference it for like... one thing. It's stupid
+    public GameObject myCamera;               // The Main Camera that is used for the 2D Game
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,36 @@ public class NightManager : MonoBehaviour
     public void setHidingStatus(bool bruh)
     {
         isHiding = bruh;
+
+        if (bruh)
+        {
+            StartCoroutine(hideCamCoroutine());
+        }
+        else
+        {
+            StartCoroutine(stopHideCamCoroutine());
+        }
+    }
+
+    IEnumerator hideCamCoroutine()
+    {
+        float movementSpeed = 1500.0f;
+        while (myCamera.transform.position.y > -1200)
+        {
+            myCamera.transform.Translate(new Vector2(0f, -1f) * movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator stopHideCamCoroutine()
+    {
+        float movementSpeed = 1000.0f;
+        while (myCamera.transform.position.y < 0)
+        {
+            myCamera.transform.Translate(new Vector2(0f, 1f) * movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+        myCamera.transform.position = new Vector3(0f, 0f, -10f);
     }
 
 

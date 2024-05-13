@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Animatronic : MonoBehaviour
 {
-    /**Any number from 0-20 */
-    public int agression;
-
+    
+    public int agression;                       // Number from 0-20, determines how likely it is that an animatronic will move
     public int locationIndex;                   //An index of where the animatronic is in the building
     public GameObject animatronImage;           //The image that is displayed of the animatronic on cameras
     [SerializeField] GameObject[] locations;    //An array of the camera locations, in the order that THIS SPECIFIC ANIMATRONIC goes on
     [SerializeField] GameObject[] locImages;    //A list of images which are different based on the animatronics location. Go in the same order as the locations
     public float moveTimer;                     //A float that increases with time
     public float decisionTime;                  //When the move timer is greater than this number, we make a decision to move.
-    public GameObject hidingScreen;
+    public NightManager myManager;
+    public bool movementEnabled;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,19 @@ public class Animatronic : MonoBehaviour
         locationIndex = 0;
         moveTimer = 0.0f;
         animatronImage = locImages[0];
+        myManager = FindFirstObjectByType<NightManager>();
+        movementEnabled = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveTimer += Time.deltaTime;
+        if (movementEnabled)
+        {
+            moveTimer += Time.deltaTime;
+        }
+
         if(moveTimer >= decisionTime)
         {
             DecideToMove();
@@ -68,18 +75,20 @@ public class Animatronic : MonoBehaviour
 
     void MoveLocation()
     {
-        if (locationIndex < locations.Length)
+        
+         locationIndex++;
+        
+        if (locationIndex >= locations.Length - 1)
         {
-            locationIndex++;
+            movementEnabled = false;
+            StartCoroutine(attemptJumpscareCoroutine());
         }
-        if (locationIndex >= locations.Length)
+        else
         {
-            attemptJumpscare();
-            //locationIndex = 2;
+            animatronImage.SetActive(false);
+            animatronImage = locImages[locationIndex];
+        }
 
-        }
-        animatronImage.SetActive(false);
-        animatronImage = locImages[locationIndex];
     }
 
     void attemptJumpscare()
@@ -94,7 +103,7 @@ public class Animatronic : MonoBehaviour
             scareTimer += Time.deltaTime;
         }
 
-        if (hidingScreen.activeInHierarchy)
+        if (!myManager.isHiding)
         {
             Debug.Log("BOO! Jumpscare");
         }
@@ -104,5 +113,25 @@ public class Animatronic : MonoBehaviour
             Debug.Log("Failed to spook, went back to spot 2");
         }
         
+    }
+
+    IEnumerator attemptJumpscareCoroutine()
+    {
+        Debug.Log("Will attempt to jumpscare shortly");
+
+        yield return new WaitForSeconds(Random.Range(5f, 10f));
+
+        if (!myManager.isHiding)
+        {
+            Debug.Log("BOO! Jumpscare");
+        }
+        else
+        {
+            locationIndex = 2;
+            Debug.Log("Failed to spook, went back to spot 2");
+            animatronImage.SetActive(false);
+            animatronImage = locImages[locationIndex];
+            movementEnabled = true;
+        }
     }
 }
