@@ -2546,7 +2546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 398115356}
-  - component: {fileID: 398115355}
+  - component: {fileID: 398115357}
   m_Layer: 0
   m_Name: GompeiBot
   m_TagString: Untagged
@@ -2554,7 +2554,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &398115355
+--- !u!4 &398115356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398115354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.5606046, y: 6.1924953, z: -49.359085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &398115357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2563,7 +2578,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 398115354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19159c8714ae724eb44dd6ea2cdc028, type: 3}
+  m_Script: {fileID: 11500000, guid: c40704abbe59aee41867b70ec9214e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agression: 20
@@ -2589,23 +2604,8 @@ MonoBehaviour:
   - {fileID: 1486718178}
   moveTimer: 0
   decisionTime: 5
-  myManager: {fileID: 0}
+  myManager: {fileID: 797399075}
   movementEnabled: 0
---- !u!4 &398115356
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398115354}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5606046, y: 6.1924953, z: -49.359085}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &413794349
 GameObject:
   m_ObjectHideFlags: 0
@@ -4381,6 +4381,9 @@ MonoBehaviour:
   currentTask: {fileID: 0}
   eve: {fileID: 0}
   myCamera: {fileID: 2141040426}
+  gompeiBot: {fileID: 398115357}
+  numAggressionIncreases: 2
+  aggressionIncrease: 6
 --- !u!1 &811581521
 GameObject:
   m_ObjectHideFlags: 0

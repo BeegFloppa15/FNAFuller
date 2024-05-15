@@ -23,7 +23,16 @@ public class NightManager : MonoBehaviour
     public Task[] nightTasks;               // A list of all the tasks that need to be done in this night
     public Task currentTask;                // The current task that is selected and activated
     public EventSystem eve;                 // The event system. We reference it for like... one thing. It's stupid
-    public GameObject myCamera;               // The Main Camera that is used for the 2D Game
+    public GameObject myCamera;             // The Main Camera that is used for the 2D Game
+
+    //ANIMATRONICS
+    [SerializeField] Animatronic gompeiBot;
+
+    //ANIMATRONIC AGGRESSION MANAGEMENT
+    public int numAggressionIncreases;      // Number of times the animatronic's agression will increase during the night, MUST BE > 0
+    public int aggressionIncrease;          // Increases animatronic agression by this number
+    private int tasksBeforeIncrease;
+    private int tasksCompleted;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +41,15 @@ public class NightManager : MonoBehaviour
         lagDelayed = false;
         camsOpen = false;
         eve = FindFirstObjectByType<EventSystem>();
+        if (numAggressionIncreases != 0)
+        {
+            tasksBeforeIncrease = nightTasks.Length / (numAggressionIncreases + 1);
+        }
+        else
+        {
+            Debug.Log("ERROR: numAggressionIncreases must be more than 1 to prevent an error");
+        }
+
     }
 
 
@@ -55,6 +73,7 @@ public class NightManager : MonoBehaviour
 
     /* Changes the hiding status, to be called when Hiding Buttons are pressed
      * Takes in a bool value
+     * Uses the next two coroutines below
      */
     public void setHidingStatus(bool bruh)
     {
@@ -139,9 +158,19 @@ public class NightManager : MonoBehaviour
     /* --- checkAllTasksDone ---
      * This is called when a task has been completed
      * It checks if all tasks have been completed, and if they have, it displays the option to leave. 
+     * ALSO: If a certain percentage of tasks are completed, we will increase each animatronic's aggression
      */
     public void checkAllTasksDone()
     {
+        //Checking to see if enough tasks have been completed to increase animatronic aggression
+        tasksCompleted++;
+        if (tasksCompleted >= tasksBeforeIncrease && numAggressionIncreases > 0)
+        {
+            //Increase all animatronic aggression
+            gompeiBot.increaseAggression(aggressionIncrease);
+            numAggressionIncreases--;
+        }
+
         foreach (Task thisTask in nightTasks)
         {
             if (!thisTask.complete)
@@ -163,6 +192,10 @@ public class NightManager : MonoBehaviour
      */
     public void winNight()
     {
+        //Disable all Animatronics
+        gompeiBot.gameObject.SetActive(false);
+
+        //Activate Win screen
         Debug.Log("Congrats! You Win!");
         winScreen.SetActive(true);
         StartCoroutine(fadeAndLoadCoroutine());
