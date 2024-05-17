@@ -8,7 +8,7 @@ public class GompeiBotAnimatronic : Animatronic
     protected override void Start()
     {
         base.Start();
-        decisionTime = 2.0f;
+        decisionTime = 5.0f;
     }
 
     // Update is called once per frame
@@ -16,6 +16,7 @@ public class GompeiBotAnimatronic : Animatronic
     {
         base.Update();
 
+        //If we are looking at Gompei through the Upper lobby cam, he might jump forward into the office or go back to Fuller Upper
         if (locationIndex == 6 && locations[6].activeInHierarchy)
         {
             StartCoroutine(gompeiFleeCoroutine());
@@ -26,6 +27,7 @@ public class GompeiBotAnimatronic : Animatronic
     {
         yield return new WaitForSeconds(Random.Range(1f, 1.5f));
 
+        //If we are still looking through Upper Lobby cam at gompei, then he will move
         if (locationIndex == 6 && locations[6].activeInHierarchy)
         {
             moveTimer = 0f;
@@ -49,16 +51,18 @@ public class GompeiBotAnimatronic : Animatronic
     {
         Debug.Log("Gompei's gonna getcha!");
 
-        //yield return new WaitForSeconds(Random.Range(5f, 10f));
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Random.Range(5f, 10f));
+
+        //If we aren't hiding, Gompei will jumpscare us
         if (!myManager.isHiding)
         {
             Debug.Log("BOO! Jumpscare");
         }
+
+        //If we are hiding, he will go back to either the basement hallway, the lower lobby, or the IMGD Hallway
         else
         {
-            //locationIndex = Random.Range(1, 3);
-            locationIndex = 6;
+            locationIndex = Random.Range(1, 3);
             animatronImage.SetActive(false);
             animatronImage = locImages[locationIndex];
             movementEnabled = true;

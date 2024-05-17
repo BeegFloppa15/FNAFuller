@@ -27,6 +27,8 @@ public class NightManager : MonoBehaviour
 
     //ANIMATRONICS
     [SerializeField] Animatronic gompeiBot;
+    [SerializeField] Animatronic hackerBot;
+    [SerializeField] Animatronic taserBot;
 
     //ANIMATRONIC AGGRESSION MANAGEMENT
     public int numAggressionIncreases;      // Number of times the animatronic's agression will increase during the night, MUST BE > 0
@@ -168,6 +170,8 @@ public class NightManager : MonoBehaviour
         {
             //Increase all animatronic aggression
             gompeiBot.increaseAggression(aggressionIncrease);
+            hackerBot.increaseAggression(aggressionIncrease + 1);
+            taserBot.increaseAggression(aggressionIncrease);
             numAggressionIncreases--;
         }
 
@@ -194,6 +198,7 @@ public class NightManager : MonoBehaviour
     {
         //Disable all Animatronics
         gompeiBot.gameObject.SetActive(false);
+        hackerBot.gameObject.SetActive(false);
 
         //Activate Win screen
         Debug.Log("Congrats! You Win!");

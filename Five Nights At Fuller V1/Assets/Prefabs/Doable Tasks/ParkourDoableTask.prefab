@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.050053377, g: 0.7169812, b: 0.05419156, a: 1}
   m_FlipX: 0
@@ -380,8 +380,6 @@ MonoBehaviour:
   finished: 0
   littleGuy: {fileID: 4231221799313631329}
   exit: {fileID: 7480596423026052016}
-  guySpeed: 4
-  jumpForce: 10
 --- !u!1 &1281848927142658570
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +587,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.050053377, g: 0.7169812, b: 0.05419156, a: 1}
   m_FlipX: 0
@@ -955,6 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9643e64c6d901fb4798441dc62765b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guySpeed: 4
+  jumpForce: 10
   myTask: {fileID: 0}
 --- !u!1 &5288405184804810193
 GameObject:

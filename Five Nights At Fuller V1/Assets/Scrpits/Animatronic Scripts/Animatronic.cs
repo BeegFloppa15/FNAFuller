@@ -73,7 +73,7 @@ public class Animatronic : MonoBehaviour
         }
         else
         {
-            Debug.Log("Staying at " + locations[locationIndex].name);
+            Debug.Log(this.name + " Staying at " + locations[locationIndex].name);
         }
        
     }
@@ -101,7 +101,7 @@ public class Animatronic : MonoBehaviour
         {
             animatronImage.SetActive(false);
             animatronImage = locImages[locationIndex];
-            Debug.Log("Moved to:" + locations[locationIndex].name);
+            Debug.Log(this.name + " Moved to:" + locations[locationIndex].name);
         }
 
     }
