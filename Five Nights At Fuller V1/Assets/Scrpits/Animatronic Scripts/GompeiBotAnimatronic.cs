@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GompeiBotAnimatronic : Animatronic
 {
+    public Animator animator;                   //Animator that is attatched to Gompei, used for the jumpscare
+    public SpriteRenderer spriteRenderer;       //Sprite Renderer that is attatched to Gompei, used for the jumpscare (disabled until jumpscare starts)
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        spriteRenderer.enabled = false;
         decisionTime = 5.0f;
     }
 
@@ -57,6 +61,9 @@ public class GompeiBotAnimatronic : Animatronic
         if (!myManager.isHiding)
         {
             Debug.Log("BOO! Jumpscare");
+            spriteRenderer.enabled = true;
+            animator.SetTrigger("Begin Jumpscare");
+            myManager.jumpscareAndLose(0.56f);
         }
 
         //If we are hiding, he will go back to either the basement hallway, the lower lobby, or the IMGD Hallway
@@ -69,4 +76,6 @@ public class GompeiBotAnimatronic : Animatronic
             Debug.Log("Failed to spook, went back to " + locations[locationIndex].name);
         }
     }
+
+    
 }

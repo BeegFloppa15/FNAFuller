@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class TaserBotAnimatronic : Animatronic
 {
+    public Animator animator;                   //Animator that is attatched to bot, used for the jumpscare
+    public SpriteRenderer spriteRenderer;       //Sprite Renderer that is attatched to bot, used for the jumpscare (disabled until jumpscare starts)
+ 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         decisionTime = 7f;
+        spriteRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -16,26 +20,7 @@ public class TaserBotAnimatronic : Animatronic
     {
         base.Update();
     }
-    /*
-    protected override void MoveLocation()
-    {
 
-        locationIndex++;
-
-        if (locationIndex >= locations.Length - 1)
-        {
-            movementEnabled = false;
-            StartCoroutine(attemptJumpscareCoroutine());
-        }
-        else
-        {
-            animatronImage.SetActive(false);
-            animatronImage = locImages[locationIndex];
-            Debug.Log(this.name + " Moved to:" + locations[locationIndex].name);
-        }
-
-    }
-    */
 
     // THIS CAUSED A CRASH THE LAST TIME WE RAN IT
     protected override IEnumerator attemptJumpscareCoroutine()
@@ -48,6 +33,9 @@ public class TaserBotAnimatronic : Animatronic
             {
                 yield return new WaitForSeconds(1.5f);
                 Debug.Log("YOU GOT TASED!!!");
+                spriteRenderer.enabled = true;
+                animator.SetTrigger("Activate Jumpscare");
+                myManager.jumpscareAndLose(0.7f);
 
             }
         }

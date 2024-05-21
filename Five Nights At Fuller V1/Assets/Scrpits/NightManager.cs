@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 //There MUST Be an empty game object in the scene hierarchy with the name "NightManager"
 public class NightManager : MonoBehaviour
@@ -224,6 +225,19 @@ public class NightManager : MonoBehaviour
 
         yield return new WaitForSeconds(5.5f);
         Debug.Log("Load Next scene");
+    }
+
+
+    public void jumpscareAndLose(float t)
+    {
+        StartCoroutine(jumpscareCoroutine(t));
+    }
+
+    IEnumerator jumpscareCoroutine(float t)
+    {
+        yield return new WaitForSeconds(t);
+        SceneManager.LoadScene("GameOverScene");
+
     }
 
     
