@@ -228,6 +228,11 @@ public class NightManager : MonoBehaviour
     }
 
 
+    /* --- jumpscareAndLose(float) ---
+     * Called when an animatronic jumpscares the player
+     * Uses the coroutine below to wait a short while, then load the game over screen
+     * Takes in a float value to determine how long to wait (in seconds)
+     * */
     public void jumpscareAndLose(float t)
     {
         StartCoroutine(jumpscareCoroutine(t));
