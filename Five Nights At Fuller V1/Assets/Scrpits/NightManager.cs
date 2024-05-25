@@ -200,6 +200,7 @@ public class NightManager : MonoBehaviour
         //Disable all Animatronics
         gompeiBot.gameObject.SetActive(false);
         hackerBot.gameObject.SetActive(false);
+        taserBot.gameObject.SetActive(false);
 
         //Activate Win screen
         Debug.Log("Congrats! You Win!");
@@ -211,7 +212,6 @@ public class NightManager : MonoBehaviour
     /* This is called by the winNight() method
      * Makes the winScreen Fade in rather than just instantly popping in
      * 
-     * !!! TO-DO !!! - Make this load the next scene after waiting a few sconds
      */
     IEnumerator fadeAndLoadCoroutine()
     {
@@ -224,7 +224,8 @@ public class NightManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(5.5f);
-        Debug.Log("Load Next scene");
+        Debug.Log("ThanksForPlayingScene");
+        SceneManager.LoadScene("ThanksForPlayingScene");
     }
 
 
