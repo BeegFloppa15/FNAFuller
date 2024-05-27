@@ -7,6 +7,8 @@ public class GompeiBotAnimatronic : Animatronic
     public Animator animator;                   //Animator that is attatched to Gompei, used for the jumpscare
     public SpriteRenderer spriteRenderer;       //Sprite Renderer that is attatched to Gompei, used for the jumpscare (disabled until jumpscare starts)
 
+    public Animator upperLobbyAnimator;         //Animator that is used for the upper lobby location 
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -38,12 +40,14 @@ public class GompeiBotAnimatronic : Animatronic
             if (Random.Range(1f, 4f) <= 3f)
             {
                 //Move forward into office
+                upperLobbyAnimator.SetTrigger("AdvanceToOffice");;
                 MoveLocation();
             }
             else
             {
                 //Move Back into Fuller Upper
                 locationIndex--;
+                upperLobbyAnimator.SetTrigger("RetreatToFlupper");
                 animatronImage.SetActive(false);
                 animatronImage = locImages[locationIndex];
                 Debug.Log("Moved Back to Flupper");
