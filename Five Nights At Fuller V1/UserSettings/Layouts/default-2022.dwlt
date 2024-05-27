@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 115
+  controlID: 125
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 40
+  controlID: 161
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -489,20 +489,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 3684ffff0c85ffffe68affff9aa9ffff84b8ffff2cbbffff34c1ffff7ac7ffff1cfbffff1e6200007c840000aa85000070950000c49a0000689b0000fa9b0000
+      m_SelectedIDs: 9ecbffff
+      m_LastClickedID: -13410
+      m_ExpandedIDs: 50c2ffffd8cdfffff8d4ffffcae0ffff14e1ffff08f1ffff6cf1ffff84f5ffff22f6ffff9ef7ffffb0f9ffff1cfbffffd2650000b8760000928600001e870000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Menu Button
-        m_OriginalName: Menu Button
+        m_Name: OneDeveloper
+        m_OriginalName: OneDeveloper
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -23426
+        m_UserData: -12840
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -884,9 +884,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 621.111, y: 274.43683, z: 4.926126}
+    m_Target: {x: 595.38275, y: 270.15857, z: -2.741047}
     speed: 2
-    m_Value: {x: 621.111, y: 274.43683, z: 4.926126}
+    m_Value: {x: 595.38275, y: 270.15857, z: -2.741047}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -936,9 +936,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 369.69247
+    m_Target: 338.84927
     speed: 2
-    m_Value: 369.69247
+    m_Value: 338.84927
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1008,7 +1008,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scrpits
+    - Assets/Images/Menu Images
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scrpits
+  - Assets/Images/Menu Images
   m_LastFoldersGridSize: 64
   m_LastProjectPath: C:\Users\bjgne\Desktop\Projects\FNAFuller\Five Nights At Fuller
     V1
@@ -1024,9 +1024,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 4}
-    m_SelectedIDs: 50650000
-    m_LastClickedID: 25936
-    m_ExpandedIDs: 0000000016650000186500001a6500001c6500001e650000206500002265000024650000266500002865000000ca9a3b
+    m_SelectedIDs: 4e650000
+    m_LastClickedID: 25934
+    m_ExpandedIDs: 0000000026650000286500002a6500002c6500002e650000306500003265000034650000366500003865000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1054,7 +1054,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000016650000186500001a6500001c6500001e6500002065000022650000246500002665000028650000
+    m_ExpandedIDs: 0000000026650000286500002a6500002c6500002e6500003065000032650000346500003665000038650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
