@@ -9,6 +9,9 @@ public class GompeiBotAnimatronic : Animatronic
 
     public Animator upperLobbyAnimator;         //Animator that is used for the upper lobby location 
 
+    public AudioSource leaveSound;              //Sound that plays if and when Gompei leaves your office
+    public AudioSource jumpscareSound;          //Sound that plays if and when Gompei Jumpscares you
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -64,6 +67,7 @@ public class GompeiBotAnimatronic : Animatronic
         //If we aren't hiding, Gompei will jumpscare us
         if (!myManager.isHiding)
         {
+            jumpscareSound.Play();
             Debug.Log("BOO! Jumpscare");
             spriteRenderer.enabled = true;
             animator.SetTrigger("Begin Jumpscare");
@@ -73,6 +77,8 @@ public class GompeiBotAnimatronic : Animatronic
         //If we are hiding, he will go back to either the basement hallway, the lower lobby, or the IMGD Hallway
         else
         {
+            leaveSound.Play();
+
             locationIndex = Random.Range(1, 3);
             animatronImage.SetActive(false);
             animatronImage = locImages[locationIndex];

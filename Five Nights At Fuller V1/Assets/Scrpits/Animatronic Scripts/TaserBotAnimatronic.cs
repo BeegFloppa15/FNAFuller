@@ -6,6 +6,8 @@ public class TaserBotAnimatronic : Animatronic
 {
     public Animator animator;                   //Animator that is attatched to bot, used for the jumpscare
     public SpriteRenderer spriteRenderer;       //Sprite Renderer that is attatched to bot, used for the jumpscare (disabled until jumpscare starts)
+
+    public AudioSource jumpscareSound;
  
     // Start is called before the first frame update
     protected override void Start()
@@ -22,7 +24,10 @@ public class TaserBotAnimatronic : Animatronic
     }
 
 
-    // THIS CAUSED A CRASH THE LAST TIME WE RAN IT
+    /* --- attemptJumpscareCoroutine
+     * Overrides the one given by animatronic class
+     * 
+     * */
     protected override IEnumerator attemptJumpscareCoroutine()
     {
         yield return null;
@@ -32,10 +37,12 @@ public class TaserBotAnimatronic : Animatronic
             if (myManager.isHiding)
             {
                 yield return new WaitForSeconds(1.5f);
+
+                jumpscareSound.Play();
                 Debug.Log("YOU GOT TASED!!!");
                 spriteRenderer.enabled = true;
                 animator.SetTrigger("Activate Jumpscare");
-                myManager.jumpscareAndLose(0.7f);
+                myManager.jumpscareAndLose(1.2f);
 
             }
         }
