@@ -19,6 +19,8 @@ public class NightManager : MonoBehaviour
     public TMP_Text statusText;             // Text displayed below task view
     public GameObject leaveCanvas;          // To be displayed when all tasks are finished, allowing player to finish the night and win
     public GameObject winScreen;            // To be displayed when player presses the button to leave, finishing the night and winning
+    public GameObject warningScreen;        // To be displayed if the player tries to work on a task that has prerequisites that haven't been completed yet
+    public TMP_Text prereqList;             // Text that will have the list of tasks to do 
 
     //INVISIBLE MANAGEMENT THINGS
     public Task[] nightTasks;               // A list of all the tasks that need to be done in this night
@@ -43,6 +45,7 @@ public class NightManager : MonoBehaviour
         isHiding = false;
         lagDelayed = false;
         camsOpen = false;
+        warningScreen.SetActive(false);
         eve = FindFirstObjectByType<EventSystem>();
         if (numAggressionIncreases != 0)
         {
@@ -132,9 +135,37 @@ public class NightManager : MonoBehaviour
             currentTask.myTask.SetActive(false);
         }
         currentTask = newTask;
-        currentTask.myTask.SetActive(true);
+        warningScreen.SetActive(false);
 
+        //if all required task for newTask are complete, then we can open the newTask
+        //Otherwise, display a screen that says which tasks we still need to do. 
+
+        foreach (Task prereq in newTask.requiredTasks)
+        {
+            if (!prereq.complete)
+            {
+                //Display screen of incomplete prereqs
+                warningScreen.SetActive(true);
+                displayRequiredTasks();
+                return;
+            }
+        }
+
+        currentTask.myTask.SetActive(true);
         eve.SetSelectedGameObject(null);
+    }
+
+    public void displayRequiredTasks()
+    {
+        prereqList.text = "";
+
+        foreach (Task prereq in currentTask.requiredTasks)
+        {
+            if (!prereq.complete)
+            {
+                prereqList.text += "- " + prereq.taskName + "\n";
+            }
+        }
     }
 
 
@@ -156,14 +187,11 @@ public class NightManager : MonoBehaviour
         statusText.text = "Status: " + newText;
     }
 
-
-
-    /* --- checkAllTasksDone ---
-     * This is called when a task has been completed
-     * It checks if all tasks have been completed, and if they have, it displays the option to leave. 
-     * ALSO: If a certain percentage of tasks are completed, we will increase each animatronic's aggression
+    /* --- checkForAgressionIncrease ---
+     * Called when you hit the green button to complete a task
+     * If a certain percentage of tasks have been complete, all Animatronics will have their aggression stat increased
      */
-    public void checkAllTasksDone()
+    public void checkForAggressionIncrease()
     {
         //Checking to see if enough tasks have been completed to increase animatronic aggression
         tasksCompleted++;
@@ -174,7 +202,17 @@ public class NightManager : MonoBehaviour
             hackerBot.increaseAggression(aggressionIncrease + 1);
             taserBot.increaseAggression(aggressionIncrease);
             numAggressionIncreases--;
+            tasksCompleted = 0;
         }
+    }
+
+    /* --- checkAllTasksDone ---
+     * This is called when a task has been completed
+     * It checks if all tasks have been completed, and if they have, it displays the option to leave. 
+     */
+    public void checkAllTasksDone()
+    {
+        setCurrentTask(currentTask);
 
         foreach (Task thisTask in nightTasks)
         {

@@ -16,7 +16,9 @@ public class Task : MonoBehaviour
     public string taskStatus;       // TO be displayed on task screen by NightManager
 
     public GameObject myTask;       //MUST BE an AbsDoableTask
-    public NightManager myManager;  
+    public NightManager myManager;
+
+    public List<Task> requiredTasks;    //A list of tasks you need to do before working on this task
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,7 @@ public class Task : MonoBehaviour
      */
     public void completeTask()
     {
+        //myManager.checkForAggressionIncrease();
         Coroutine myCoroutine = StartCoroutine(taskTimerCoroutine());
     }
 
